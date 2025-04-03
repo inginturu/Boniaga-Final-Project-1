@@ -1,0 +1,15 @@
+/* Mengatur lebar maksimum elemen */
+.custom-description {
+    max-width: 100%; /* Atur agar tidak lebih lebar dari layar */
+    overflow-wrap: break-word; /* Agar kata tidak terpotong atau melampaui batas */
+    word-wrap: break-word;
+    white-space: normal; /* Membuat teks agar bisa dipotong saat mencapai batas */
+    margin: 0 auto; /* Menjaga agar tetap terpusat */
+}
+
+/* Atur komponen Filament dengan lebar tertentu */
+.custom-component {
+    max-width: 80%; /* Atur lebar komponen sesuai kebutuhan */
+    margin: 0 auto; /* Menjaga komponen tetap terpusat */
+    padding: 1rem; /* Atur jarak dalam komponen */
+}
