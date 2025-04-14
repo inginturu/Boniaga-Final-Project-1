@@ -9,3 +9,10 @@ Route::get('/', function () {
 
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
+
+Route::get('/contoh', function () {
+    return view('templates.template');
+});
+Route::get('/us', function () {
+    return view('templates.pages.about-us');
+});
