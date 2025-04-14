@@ -73,7 +73,7 @@ class ProductsResource extends Resource
                 ImageColumn::make('images.image_path')
                     ->label('Gambar Produk')
                     ->defaultImageUrl(url('/default-product.jpg')),
-
+                    
                 TextColumn::make('category_id')->label('Kategori')->sortable(),
             ])
             ->filters([])
