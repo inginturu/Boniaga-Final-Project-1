@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <link rel="icon" href="{{ url('assets/img/BoniagaLogo.jpg') }}">
   <title>Hello, world!</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -13,7 +14,7 @@
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- Material Kit CSS -->
-  <link href="{{asset('assets/css/material-kit.css?v=3.0.0')}}" rel="stylesheet" />
+  <link href="{{url('assets/css/material-kit.css?v=3.0.0')}}" rel="stylesheet" />
 </head>
 
 <body>
@@ -21,8 +22,8 @@
   <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent">
     <div class="container">
       <a class="navbar-brand  text-white " href="https://demos.creative-tim.com/material-kit/presentation" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
-        Material Kit 2
-      </a>
+      <img src="{{ url('assets/img/BoniagaLogo.jpg') }}" alt="Boniaga Logo" style="height: 50px;" class="me-2">  
+    </a>
       <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon mt-2">
           <span class="navbar-toggler-bar bar1"></span>

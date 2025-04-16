@@ -26,6 +26,7 @@ class ProductsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Produk';
     public static function form(Form $form): Form
     {
         return $form
@@ -81,8 +82,16 @@ class ProductsResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
+                Tables\Actions\DeleteBulkAction::make()
+                ->label('Hapus Produk')
+                ->icon('heroicon-o-trash') // kamu bisa ganti iconnya
+                ->color('danger') // pilihan: primary, secondary, success, warning, danger
+                ->requiresConfirmation() // tampilkan dialog konfirmasi
+                ->modalHeading('Hapus Produk yang Dipilih?')
+                ->modalSubheading('Tindakan ini tidak bisa dibatalkan. Lanjutkan?')
+                ->modalButton('Ya, Hapus') // teks tombol dalam modal,
+            ])
+            ->recordUrl(null);
     }
 
     public static function getRelations(): array
