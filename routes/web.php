@@ -18,3 +18,7 @@ Route::get('/', [CategoriesController::class, 'index'])->name('categories');
 Route::get('/products', function(){
     return view('products.index');
 });
+
+Route::get('/contoh', function (){
+    return view('halo.index');
+});

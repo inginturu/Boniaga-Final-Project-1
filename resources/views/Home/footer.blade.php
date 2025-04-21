@@ -1,4 +1,4 @@
-<footer class="footer pt-5 mt-5" style="background-color: #B53535; color: white;">
+<footer class="footer pt-5 mt-5" style="background-color: black; color: white;">
     <div class="container">
         <div class=" row">
             <div class="col-md-3 mb-4 ms-auto">
@@ -6,7 +6,7 @@
                     <a href="https://www.creative-tim.com/product/material-kit">
                         <img src="{{url('assets/img/BoniagaLogo.jpg')}}" class="mb-3 footer-logo" alt="main_logo">
                     </a>
-                    <h6 class="font-weight-bolder mb-4">Boniaga</h6>
+                    <h6 class="font-weight-bolder mb-4" style="color: white;">Boniaga</h6>
                 </div>
                 <div>
                     <ul class="d-flex flex-row ms-n3 nav">
@@ -40,11 +40,11 @@
                 </div>
             </div>
             <div class="col-md-2 col-sm-6 col-6 mb-4">
-                <div>
-                    <h6 class="text-sm">Company</h6>
+                <div style="color: white;">
+                    <h6 class="text-sm" style="color: white;">Company</h6>
                     <ul class="flex-column ms-n3 nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/presentation" target="_blank">
+                            <a class="nav-link" href="https://www.creative-tim.com/presentation" target="_blank" style="color: white;">
                                 About Us
                             </a>
                         </li>
