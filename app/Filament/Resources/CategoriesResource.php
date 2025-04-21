@@ -22,7 +22,8 @@ class CategoriesResource extends Resource
     protected static ?string $model = Categories::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Produk';
+    protected static ?string $navigationGroup = 'Informasi Produk';
+    protected static ?string $pluralModelLabel = 'Kategori Produk';
 
     public static function form(Form $form): Form
     {
@@ -48,7 +49,14 @@ class CategoriesResource extends Resource
                 TextColumn::make('description')
                     ->label('Deskripsi')
                     ->wrap()
-                    ->limit(100),            ])
+                    ->limit(100),
+
+                TextColumn::make('products_count')
+                    ->label(label: 'Jumlah Produk')
+                    ->counts('products') // Ini fitur keren dari Filament
+                    ->sortable()
+                    // ->getRelationshipsToCount(),
+            ])
             ->filters([
                 // Filter bisa ditambahkan di sini jika diperlukan
             ])
@@ -57,14 +65,14 @@ class CategoriesResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make()
-                ->label('Hapus Produk')
-                ->icon('heroicon-o-trash') // kamu bisa ganti iconnya
-                ->color('danger') // pilihan: primary, secondary, success, warning, danger
-                ->requiresConfirmation() // tampilkan dialog konfirmasi
-                ->modalHeading('Hapus Produk yang Dipilih?')
-                ->modalSubheading('Tindakan ini tidak bisa dibatalkan. Lanjutkan?')
-                ->modalButton('Ya, Hapus') // teks tombol dalam modal,
-            ])  
+                    ->label('Hapus Produk')
+                    ->icon('heroicon-o-trash') // kamu bisa ganti iconnya
+                    ->color('danger') // pilihan: primary, secondary, success, warning, danger
+                    ->requiresConfirmation() // tampilkan dialog konfirmasi
+                    ->modalHeading('Hapus Produk yang Dipilih?')
+                    ->modalSubheading('Tindakan ini tidak bisa dibatalkan. Lanjutkan?')
+                    ->modalButton('Ya, Hapus') // teks tombol dalam modal,
+            ])
             ->recordUrl(null);
     }
 

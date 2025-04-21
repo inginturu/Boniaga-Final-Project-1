@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
 
-<head>
+<l>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
@@ -32,8 +32,9 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/material-kit.css?v=3.1.0" rel="stylesheet" />
-</head>
+  <link id="pagestyle" href="{{url('assets/css/material-kit.css?v=3.1.0')}}" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="{{ url('assets/css/products.css') }}"> -->
+</l>
 
 <body class="about-us bg-gray-100">
 

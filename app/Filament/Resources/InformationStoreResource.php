@@ -25,6 +25,7 @@ class InformationStoreResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
 
     protected static ?string $navigationGroup = 'Informasi Toko';
+    protected static ?string $pluralModelLabel = 'Informasi Toko';
 
     public static function form(Form $form): Form
     {
