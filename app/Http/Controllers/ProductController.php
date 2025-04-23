@@ -37,7 +37,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Products::with('images')->findOrFail($id);
+        return view('products.show', compact('product'));
     }
 
     /**
