@@ -74,32 +74,52 @@
       margin-bottom: 30px;
     }
 
+    /* NEW PAGINATION STYLES */
+    .pagination-container {
+      text-align: center;
+      margin: 40px 0;
+    }
+
     .pagination {
-      display: flex;
-      justify-content: center;
-      margin: 30px 0;
+      display: inline-flex;
+      align-items: center;
     }
 
-    .pagination li {
+    .pagination .page-item {
       margin: 0 5px;
-      list-style: none;
     }
 
-    .pagination li a {
-      width: 30px;
-      height: 30px;
+    .pagination .page-link {
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #000;
-      text-decoration: none;
-      border-radius: 5px;
+      padding: 0;
+      border-radius: 50%;
       font-size: 14px;
+      color: #000;
+      border: none;
+      background-color: transparent;
     }
 
-    .pagination li.active a {
-      background-color: #333;
-      color: white;
+    .pagination .page-item.active .page-link {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .pagination .page-item.disabled .page-link {
+      color: #999;
+      pointer-events: none;
+    }
+
+    /* Media query for smaller screens */
+    @media (max-width: 576px) {
+      .pagination .page-link {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+      }
     }
   </style>
 </head>
@@ -109,11 +129,17 @@
 
   <!-- Input Pencarian -->
   <div class="container search-container">
-    <div class="position-relative">
-      <input type="text" id="searchInput" class="search-input" placeholder="Cari produk...">
-      <span class="search-icon"><i class="fa fa-search"></i></span>
+    <div class="position-relative"> 
+      <!-- <input type="text" id="searchInput" class="search-input" placeholder="Cari produk...">
+      <span class="search-icon"><i class="fa fa-search"></i></span> -->
+      <form action="{{ route('products') }}" method="GET" class="position-relative">
+        <input type="text" name="search" class="search-input" placeholder="Cari produk..." value="{{ request('search') }}">
+        <span class="search-icon"><i class="fa fa-search"></i></span>
+      </form>
     </div>
   </div>
+
+
 
   <section class="container">
     <div class="row row-eq-height" id="productContainer">
@@ -122,11 +148,9 @@
         <div class="product-wrapper">
           <div class="card product-card">
             @if ($product->images->isNotEmpty())
-            <!-- Perbaikan path gambar -->
             <img src="{{ asset('storage/product_images/' . basename($product->images->first()->image_path)) }}"
               class="card-img-top product-img"
               alt="{{ $product->name }}">
-
             @else
             <img src="{{ asset('assets/img/default-product.jpg') }}" class="card-img-top product-img" alt="Gambar tidak tersedia">
             @endif
@@ -144,15 +168,83 @@
       @endforeach
     </div>
 
-    <!-- Pagination -->
-    <div class="container my-4 d-flex justify-content-center">
-      {{ $products->links() }}
+    <!-- NEW PAGINATION CODE -->
+    <div class="pagination-container text-center my-5">
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+          <!-- Previous button -->
+          <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ $products->previousPageUrl() }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+
+          <!-- Page numbers -->
+          @php
+          $currentPage = $products->currentPage();
+          $lastPage = $products->lastPage();
+          @endphp
+
+          <!-- First page -->
+          <li class="page-item {{ $currentPage == 1 ? 'active' : '' }}">
+            <a class="page-link" href="{{ $products->url(1) }}">1</a>
+          </li>
+
+          <!-- Handle page 2 & 3 -->
+          @if($currentPage <= 4)
+            @for($i=2; $i <=min(5, $lastPage); $i++)
+            <li class="page-item {{ $i == $currentPage ? 'active' : '' }}">
+            <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
+            </li>
+            @endfor
+            @else
+            <!-- Show ellipsis for skipped pages at the start -->
+            <li class="page-item disabled">
+              <span class="page-link">...</span>
+            </li>
+
+            <!-- Show pages around current page -->
+            @for($i = $currentPage - 1; $i <= min($currentPage + 1, $lastPage); $i++)
+              <li class="page-item {{ $i == $currentPage ? 'active' : '' }}">
+              <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
+              </li>
+              @endfor
+              @endif
+
+              <!-- Handle ending pages -->
+              @if($currentPage < $lastPage - 3)
+                <!-- Show ellipsis for skipped pages at the end -->
+                <li class="page-item disabled">
+                  <span class="page-link">...</span>
+                </li>
+
+                @if($lastPage > 1)
+                <li class="page-item {{ $currentPage == $lastPage ? 'active' : '' }}">
+                  <a class="page-link" href="{{ $products->url($lastPage) }}">{{ $lastPage }}</a>
+                </li>
+                @endif
+                @elseif($currentPage < $lastPage - 1)
+                  @for($i=$currentPage + 2; $i <=$lastPage; $i++)
+                  <li class="page-item {{ $i == $currentPage ? 'active' : '' }}">
+                  <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
+                  </li>
+                  @endfor
+                  @endif
+
+                  <!-- Next button -->
+                  <li class="page-item {{ !$products->hasMorePages() ? 'disabled' : '' }}">
+                    <a class="page-link" href="{{ $products->nextPageUrl() }}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+        </ul>
+      </nav>
     </div>
   </section>
 
   @include('home.footer')
 
-  <script>
+  <!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
       const searchInput = document.getElementById('searchInput');
       const cards = document.querySelectorAll('.product-wrapper');
@@ -166,7 +258,7 @@
         });
       });
     });
-  </script>
+  </script> -->
 </body>
 
 </html>

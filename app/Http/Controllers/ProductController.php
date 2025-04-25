@@ -10,11 +10,28 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    // public function index()
+    // {
+    //     $products = Products::with('images')->paginate(6);
+    //     return view('products.index', compact('products'));
+    // }
+    public function index(Request $request)
     {
-        $products = Products::with('images')->paginate(6);
+        $query = Products::with('images');
+
+        if ($request->has('search') && $request->search != '') {
+            $keyword = $request->search;
+            $query->where(function ($q) use ($keyword) {
+                $q->where('name', 'like', "%{$keyword}%")
+                    ->orWhere('description', 'like', "%{$keyword}%");
+            });
+        }
+
+        $products = $query->paginate(6)->withQueryString();
+
         return view('products.index', compact('products'));
     }
+
 
     /**
      * Show the form for creating a new resource.
