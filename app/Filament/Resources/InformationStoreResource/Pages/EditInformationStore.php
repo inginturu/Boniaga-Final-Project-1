@@ -16,4 +16,9 @@ class EditInformationStore extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+    public static function canDelete(): bool
+    {
+        return false;
+    }
+
 }

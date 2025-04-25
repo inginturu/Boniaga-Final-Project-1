@@ -16,4 +16,9 @@ class ListInformationStores extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+    public function canCreate(): bool
+    {
+        return false;
+    }
+
 }

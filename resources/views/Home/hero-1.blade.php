@@ -126,12 +126,12 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="product-price">Rp 1.250.000</span>
                                 <a href="#" class="btn btn-sm btn-outline-red">Lihat Detail</a>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="text-center mt-4">
                 <a href="/products" class="btn btn-red">Lihat Semua Produk</a>
             </div>

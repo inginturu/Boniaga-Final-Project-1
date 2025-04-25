@@ -14,3 +14,4 @@ Route::get('/products/{id}', [ProductController::class, 'show'])->name('products
 Route::get('/contoh', function () {
     return view('halo.index');
 });
+
