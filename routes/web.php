@@ -22,3 +22,9 @@ Route::get('/products', function(){
 Route::get('/contoh', function (){
     return view('halo.index');
 });
+Route::get('/contoh2', function (){
+    return view('halo.contoh2');
+});
+Route::get('/contoh3', function (){
+    return view('halo.contoh3');
+});

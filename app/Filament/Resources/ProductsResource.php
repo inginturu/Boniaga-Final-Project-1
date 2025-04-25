@@ -100,7 +100,7 @@ class ProductsResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ProductResource\RelationManagers\ImagesRelationManager::class,
+            // ProductResource\RelationManagers\ImagesRelationManager::class,
         ];
     }
 
