@@ -15,3 +15,6 @@ Route::get('/contoh', function () {
     return view('halo.index');
 });
 
+Route::get('/tentangkami', function () {
+    return view('about.tentangkami');
+});
