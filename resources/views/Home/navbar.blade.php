@@ -15,6 +15,9 @@
         </button>
         <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0 ms-lg-12 ps-lg-5" id="navigation">
             <ul class="navbar-nav navbar-nav-hover ms-auto">
+            <li class="nav-item">
+                    <a class="nav-link text-white" href="/">Beranda</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/">Beranda</a>
                 </li>

@@ -1,5 +1,5 @@
 <!-- Cultural Elements Section -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <section class="cultural-section">
     <div class="container">
         <div class="section-title text-center mb-5">
@@ -11,21 +11,21 @@
                     <i class="fas fa-hands"></i>
                 </div>
                 <h4>Buatan Tangan</h4>
-                <p>Setiap produk dibuat dengan penuh ketelitian dan keterampilan tangan pengrajin lokal yang berpengalaman.</p>
+                <p>Setiap produk dibuat secara original oleh tangan terampil, menghasilkan karya unik yang tidak akan Anda temukan di tempat lain di luar kawasan Toba.</p>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="cultural-icon">
-                    <i class="fas fa-history"></i>
+                    <i class="fas fa-medal"></i> 
                 </div>
-                <h4>Kaya Sejarah</h4>
-                <p>Motif dan pola dalam produk kami mengandung makna filosofis dan narasi sejarah yang mendalam.</p>
+                <h4>Berkualitas</h4>
+                <p>Setiap produk kami memiliki standar kualitas tinggi, mencerminkan keunggulan karya tangan lokal.</p>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="cultural-icon">
-                    <i class="fas fa-seedling"></i>
+                    <i class="fas fa-briefcase"></i> 
                 </div>
-                <h4>Berkelanjutan</h4>
-                <p>Kami menggunakan bahan-bahan ramah lingkungan dan mendukung praktik produksi yang berkelanjutan.</p>
+                <h4>Lapangan Pekerjaan</h4>
+                <p>Dengan mendukung produk lokal, kami turut membuka peluang kerja bagi komunitas pengrajin dan masyarakat sekitar.</p>
             </div>
         </div>
     </div>
