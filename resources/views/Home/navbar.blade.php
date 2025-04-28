@@ -16,19 +16,13 @@
         <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0 ms-lg-12 ps-lg-5" id="navigation">
             <ul class="navbar-nav navbar-nav-hover ms-auto">
                 <li class="nav-item">
+                    <a class="nav-link text-white" href="/">Beranda</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-white" href="products">Produk</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="#tentang">Tentang Kami</a>
-                </li>
-
-                <li class="nav-item ms-lg-auto">
-                    <a class="nav-link nav-link-icon me-2"
-                        href="https://github.com/creativetimofficial/soft-ui-design-system" target="_blank">
-                        <i class="fa fa-github me-1"></i>
-                        <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
-                            data-bs-placement="bottom" title="Star us on Github">Github</p>
-                    </a>
                 </li>
                 <!-- <li class="nav-item my-auto ms-3 ms-lg-0">
                     <a href="https://www.creative-tim.com/product/material-kit-pro"
