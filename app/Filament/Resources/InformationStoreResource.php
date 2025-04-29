@@ -70,8 +70,8 @@ class InformationStoreResource extends Resource
     }
 
     // Disable tombol create
-    public static function canCreate(): bool
-    {
-        return false;
-    }
+    // public static function canCreate(): bool
+    // {
+    //     return false;
+    // }
 }

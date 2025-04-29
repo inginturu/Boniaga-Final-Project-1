@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CategoriesResource\Pages;
 use App\Models\Categories;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -35,6 +36,11 @@ class CategoriesResource extends Resource
 
                 Textarea::make('description')
                     ->label('Deskripsi Kategori'),
+                
+                FileUpload::make('image')
+                    ->label('Gambar Kategori')
+                    ->image()
+                    ->nullable(),
             ]);
     }
 
@@ -51,11 +57,14 @@ class CategoriesResource extends Resource
                     ->wrap()
                     ->limit(100),
 
+                ImageColumn::make('image')
+                    ->label('Gambar Kategori'),
+
                 TextColumn::make('products_count')
                     ->label(label: 'Jumlah Produk')
                     ->counts('products') // Ini fitur keren dari Filament
-                    ->sortable()
-                    // ->getRelationshipsToCount(),
+                    ->sortable(),
+                // ->getRelationshipsToCount(),
             ])
             ->filters([
                 // Filter bisa ditambahkan di sini jika diperlukan
