@@ -173,7 +173,14 @@
       justify-content: center;
     }
 
+    /* NEW PAGINATION STYLES */
+    .pagination-container {
+      text-align: center;
+      margin: 40px 0;
+    }
+
     .pagination {
+
       display: flex;
       list-style: none;
       padding: 0;
@@ -271,6 +278,7 @@
       .btn-view {
         width: 100%;
         text-align: center;
+
       }
     }
   </style>
@@ -280,6 +288,7 @@
   @include('home.navbar')
 
   <div class="container search-container">
+
     <form action="{{ route('products') }}" method="GET" class="search-form">
       <input type="text" name="search" class="search-input" placeholder="Cari produk..." value="{{ request('search') }}">
       <button type="submit" class="search-button" aria-label="Search">
@@ -288,9 +297,13 @@
         </svg>
       </button>
     </form>
+
   </div>
 
+
+
   <section class="container">
+
     @if(count($products) > 0)
       <div class="product-grid">
         @foreach ($products as $product)
@@ -303,6 +316,7 @@
               @endif
             </div>
             <div class="product-body">
+
               <h5 class="product-title">{{ $product->name }}</h5>
               <p class="product-description">{{ $product->description }}</p>
               <div class="product-footer">
@@ -314,11 +328,13 @@
         @endforeach
       </div>
 
+
       <!-- Pagination Section -->
       <div class="pagination-container">
         {{ $products->withQueryString()->links('pagination::bootstrap-4') }}
       </div>
     @endif
+
   </section>
 
   @include('home.footer')
@@ -327,6 +343,7 @@
   <script src="{{ asset('assets/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
   <script src="{{ asset('assets/js/material-kit.min.js?v=3.0.4') }}" type="text/javascript"></script>
+
 </body>
 
 </html>

@@ -55,11 +55,6 @@ class InformationStoreResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [];
-    }
-
     public static function getPages(): array
     {
         return [
@@ -67,6 +62,13 @@ class InformationStoreResource extends Resource
             // 'create' page disediakan tapi kita akan disable aksesnya di bawah
             'edit' => Pages\EditInformationStore::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationUrl(): string
+    {
+        $record = InformationStore::first();
+
+        return static::getUrl('edit', ['record' => $record]);
     }
 
     // Disable tombol create

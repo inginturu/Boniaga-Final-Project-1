@@ -14,4 +14,8 @@ class CreateProducts extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    protected function getSaveButtonLabel(): ?string{
+        return 'Simpan';
+    }
 }

@@ -18,9 +18,9 @@
                                         <div class="row">
                                             <div class="col-4 mt-n5">
                                                 <div class="p-3 pe-md-0">
-                                                    @if ($kategori->gambar)
+                                                    @if ($kategori->image)
                                                         <img class="w-100 border-radius-md shadow-lg"
-                                                            src="{{ asset('storage/kategori/' . $kategori->gambar) }}"
+                                                            src="{{ asset('storage/' . $kategori->image) }}"
                                                             alt="{{ $kategori->name }}">
                                                     @endif
                                                 </div>
