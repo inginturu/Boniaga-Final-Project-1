@@ -26,6 +26,11 @@ class CategoriesResource extends Resource
     protected static ?string $navigationGroup = 'Informasi Produk';
     protected static ?string $pluralModelLabel = 'Kategori Produk';
 
+    public static function getModelLabel(): string
+    {
+        return 'Produk';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
