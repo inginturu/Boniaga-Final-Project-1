@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
 
 <head>
@@ -10,68 +10,167 @@
   <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/css/material-kit.css?v=3.1.0') }}" rel="stylesheet" />
   <style>
-    /* CSS tidak diubah */
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
     .search-container {
       margin-top: 100px;
       margin-bottom: 30px;
+    }
+
+    .search-form {
       position: relative;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .search-input {
       width: 100%;
-      padding: 12px 20px;
+      padding: 14px 50px 14px 20px;
       border: 1px solid #ddd;
       border-radius: 24px;
       font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
-    .search-icon {
+    .search-input:focus {
+      border-color: #aaa;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      outline: none;
+    }
+
+    .search-button {
       position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #6c757d;
+      right: 5px;
+      top: 5px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .search-button:hover {
+      background: #555;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
     }
 
     .product-card {
-      margin-bottom: 30px;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      background: white;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .product-img-container {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
     }
 
     .product-img {
-      height: 200px;
-      object-fit: cover;
+      height: 100%;
       width: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-img {
+      transform: scale(1.05);
+    }
+
+    .product-body {
+      padding: 16px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .product-title {
       font-weight: 600;
       margin-bottom: 10px;
+      font-size: 18px;
+      color: #333;
+      line-height: 1.3;
+    }
+
+    .product-description {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+      flex-grow: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
     }
 
     .product-price {
-      font-weight: bold;
+      font-weight: 700;
       color: #333;
+      font-size: 17px;
     }
 
-    .product-wrapper {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
+    .btn-view {
+      padding: 8px 15px;
+      border-radius: 4px;
+      background-color: white;
+      color: #333;
+      border: 1px solid #ddd;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      text-decoration: none;
     }
 
-    .row-eq-height {
-      display: flex;
-      flex-wrap: wrap;
+    .btn-view:hover {
+      background-color: #333;
+      color: white;
+      border-color: #333;
     }
 
-    .row-eq-height>[class*='col-'] {
+    .pagination-container {
+      margin: 40px 0;
       display: flex;
-      flex-direction: column;
-      margin-bottom: 30px;
+      justify-content: center;
     }
 
     /* NEW PAGINATION STYLES */
@@ -81,184 +180,170 @@
     }
 
     .pagination {
-      display: inline-flex;
-      align-items: center;
+
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-radius: 4px;
+      overflow: hidden;
     }
 
-    .pagination .page-item {
-      margin: 0 5px;
+    .page-item {
+      margin: 0 3px;
     }
 
-    .pagination .page-link {
-      width: 36px;
-      height: 36px;
+    .page-link {
+      min-width: 38px;
+      height: 38px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0;
-      border-radius: 50%;
+      color: #555;
+      text-decoration: none;
+      border-radius: 4px;
       font-size: 14px;
-      color: #000;
-      border: none;
-      background-color: transparent;
+      font-weight: 500;
+      border: 1px solid #ddd;
+      transition: all 0.2s ease;
     }
 
-    .pagination .page-item.active .page-link {
-      background-color: #000;
-      color: #fff;
+    .page-item.active .page-link {
+      background-color: #333;
+      color: white;
+      border-color: #333;
     }
 
-    .pagination .page-item.disabled .page-link {
-      color: #999;
+    .page-item.disabled .page-link {
+      color: #aaa;
       pointer-events: none;
+      background-color: #f9f9f9;
     }
 
-    /* Media query for smaller screens */
+    .page-link:hover:not(.disabled) {
+      background-color: #f1f1f1;
+      border-color: #ccc;
+    }
+
+    .no-products {
+      text-align: center;
+      padding: 50px 0;
+      color: #666;
+      font-size: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 15px;
+      }
+
+      .product-img-container {
+        height: 180px;
+      }
+
+      .search-container {
+        margin-top: 80px;
+      }
+
+      .product-title {
+        font-size: 16px;
+      }
+    }
+
     @media (max-width: 576px) {
-      .pagination .page-link {
-        width: 32px;
-        height: 32px;
-        font-size: 13px;
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .product-body {
+        padding: 12px;
+      }
+
+      .product-img-container {
+        height: 160px;
+      }
+
+      .product-description {
+        display: none;
+      }
+
+      .product-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .btn-view {
+        width: 100%;
+        text-align: center;
+
       }
     }
   </style>
 </head>
 
-<body class="blog-author bg-gray-100">
+<body>
   @include('home.navbar')
 
-  <!-- Input Pencarian -->
   <div class="container search-container">
-    <div class="position-relative"> 
-      <!-- <input type="text" id="searchInput" class="search-input" placeholder="Cari produk...">
-      <span class="search-icon"><i class="fa fa-search"></i></span> -->
-      <form action="{{ route('products') }}" method="GET" class="position-relative">
-        <input type="text" name="search" class="search-input" placeholder="Cari produk..." value="{{ request('search') }}">
-        <span class="search-icon"><i class="fa fa-search"></i></span>
-      </form>
-    </div>
+
+    <form action="{{ route('products') }}" method="GET" class="search-form">
+      <input type="text" name="search" class="search-input" placeholder="Cari produk..." value="{{ request('search') }}">
+      <button type="submit" class="search-button" aria-label="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+      </button>
+    </form>
+
   </div>
 
 
 
   <section class="container">
-    <div class="row row-eq-height" id="productContainer">
-      @foreach ($products as $product)
-      <div class="col-md-4 col-sm-6">
-        <div class="product-wrapper">
-          <div class="card product-card">
-            @if ($product->images->isNotEmpty())
-            <img src="{{ asset('storage/product_images/' . basename($product->images->first()->image_path)) }}"
-              class="card-img-top product-img"
-              alt="{{ $product->name }}">
-            @else
-            <img src="{{ asset('assets/img/default-product.jpg') }}" class="card-img-top product-img" alt="Gambar tidak tersedia">
-            @endif
-            <div class="card-body">
+
+    @if(count($products) > 0)
+      <div class="product-grid">
+        @foreach ($products as $product)
+          <div class="product-card">
+            <div class="product-img-container">
+              @if ($product->images->isNotEmpty())
+                <img src="{{ asset('storage/product_images/' . basename($product->images->first()->image_path)) }}" class="product-img" alt="{{ $product->name }}">
+              @else
+                <img src="{{ asset('assets/img/default-product.jpg') }}" class="product-img" alt="Gambar tidak tersedia">
+              @endif
+            </div>
+            <div class="product-body">
+
               <h5 class="product-title">{{ $product->name }}</h5>
-              <p class="card-text">{{ $product->description }}</p>
-              <div class="d-flex justify-content-between align-items-center mt-auto">
+              <p class="product-description">{{ $product->description }}</p>
+              <div class="product-footer">
                 <span class="product-price">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
-                <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-outline-primary">Lihat Detail</a>
+                <a href="{{ route('products.show', $product->id) }}" class="btn-view">Lihat Detail</a>
               </div>
             </div>
           </div>
-        </div>
+        @endforeach
       </div>
-      @endforeach
-    </div>
 
-    <!-- NEW PAGINATION CODE -->
-    <div class="pagination-container text-center my-5">
-      <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-          <!-- Previous button -->
-          <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
-            <a class="page-link" href="{{ $products->previousPageUrl() }}" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
 
-          <!-- Page numbers -->
-          @php
-          $currentPage = $products->currentPage();
-          $lastPage = $products->lastPage();
-          @endphp
+      <!-- Pagination Section -->
+      <div class="pagination-container">
+        {{ $products->withQueryString()->links('pagination::bootstrap-4') }}
+      </div>
+    @endif
 
-          <!-- First page -->
-          <li class="page-item {{ $currentPage == 1 ? 'active' : '' }}">
-            <a class="page-link" href="{{ $products->url(1) }}">1</a>
-          </li>
-
-          <!-- Handle page 2 & 3 -->
-          @if($currentPage <= 4)
-            @for($i=2; $i <=min(5, $lastPage); $i++)
-            <li class="page-item {{ $i == $currentPage ? 'active' : '' }}">
-            <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
-            </li>
-            @endfor
-            @else
-            <!-- Show ellipsis for skipped pages at the start -->
-            <li class="page-item disabled">
-              <span class="page-link">...</span>
-            </li>
-
-            <!-- Show pages around current page -->
-            @for($i = $currentPage - 1; $i <= min($currentPage + 1, $lastPage); $i++)
-              <li class="page-item {{ $i == $currentPage ? 'active' : '' }}">
-              <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
-              </li>
-              @endfor
-              @endif
-
-              <!-- Handle ending pages -->
-              @if($currentPage < $lastPage - 3)
-                <!-- Show ellipsis for skipped pages at the end -->
-                <li class="page-item disabled">
-                  <span class="page-link">...</span>
-                </li>
-
-                @if($lastPage > 1)
-                <li class="page-item {{ $currentPage == $lastPage ? 'active' : '' }}">
-                  <a class="page-link" href="{{ $products->url($lastPage) }}">{{ $lastPage }}</a>
-                </li>
-                @endif
-                @elseif($currentPage < $lastPage - 1)
-                  @for($i=$currentPage + 2; $i <=$lastPage; $i++)
-                  <li class="page-item {{ $i == $currentPage ? 'active' : '' }}">
-                  <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
-                  </li>
-                  @endfor
-                  @endif
-
-                  <!-- Next button -->
-                  <li class="page-item {{ !$products->hasMorePages() ? 'disabled' : '' }}">
-                    <a class="page-link" href="{{ $products->nextPageUrl() }}" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-        </ul>
-      </nav>
-    </div>
   </section>
 
   @include('home.footer')
 
-  <!-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const searchInput = document.getElementById('searchInput');
-      const cards = document.querySelectorAll('.product-wrapper');
+  <script src="{{ asset('assets/js/core/popper.min.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('assets/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+  <script src="{{ asset('assets/js/material-kit.min.js?v=3.0.4') }}" type="text/javascript"></script>
 
-      searchInput.addEventListener('input', function() {
-        const keyword = this.value.toLowerCase();
-        cards.forEach(card => {
-          const title = card.querySelector('.product-title').textContent.toLowerCase();
-          const visible = title.includes(keyword);
-          card.style.display = visible ? 'block' : 'none';
-        });
-      });
-    });
-  </script> -->
 </body>
 
 </html>

@@ -15,22 +15,23 @@ class ProductController extends Controller
     //     $products = Products::with('images')->paginate(6);
     //     return view('products.index', compact('products'));
     // }
+
     public function index(Request $request)
-    {
-        $query = Products::with('images');
+{
+    $query = Products::with('images');
 
-        if ($request->has('search') && $request->search != '') {
-            $keyword = $request->search;
-            $query->where(function ($q) use ($keyword) {
-                $q->where('name', 'like', "%{$keyword}%")
-                    ->orWhere('description', 'like', "%{$keyword}%");
-            });
-        }
-
-        $products = $query->paginate(6)->withQueryString();
-
-        return view('products.index', compact('products'));
+    if ($request->has('search') && $request->search != '') {
+        $keyword = $request->search;
+        $query->where(function($q) use ($keyword) {
+            $q->where('name', 'like', "%{$keyword}%")
+              ->orWhere('description', 'like', "%{$keyword}%");
+        });
     }
+
+    $products = $query->paginate(6)->withQueryString();
+
+    return view('products.index', compact('products'));
+}
 
 
     /**
@@ -56,6 +57,18 @@ class ProductController extends Controller
     {
         $product = Products::with('images')->findOrFail($id);
         return view('products.show', compact('product'));
+
+            // Mengambil produk dengan eager loading gambar
+    $product = Products::with('images')->findOrFail($id);
+    
+    // Mengambil produk terkait (misalnya dari kategori yang sama)
+    $relatedProducts = Products::with('images')
+                        ->where('id', '!=', $id)
+                        ->limit(4)
+                        ->get();
+    
+    // Menampilkan view dengan data produk dan produk terkait
+    return view('products.show', compact('product', 'relatedProducts'));
     }
 
     /**
