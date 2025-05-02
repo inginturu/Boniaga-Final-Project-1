@@ -1,4 +1,5 @@
 <section class="pb-5 position-relative bg-gradient-dark mx-n3">
+<<<<<<< Updated upstream
     <div class="container">
         <div class="row">
             <div class="col-md-8 text-start mb-5 mt-5">
@@ -50,5 +51,13 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+=======
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 text-start mb-5 mt-5" data-aos="fade-right">
+        <h3 class="text-white z-index-1 position-relative">Kategori Produk Boniaga</h3>
+        <p class="text-white opacity-8 mb-0">Temukan berbagai produk khas budaya Batak yang kami tawarkan.</p>
+      </div>
+>>>>>>> Stashed changes
     </div>
 </section>
