@@ -51,6 +51,7 @@ class ProductsResource extends Resource
 
                 Repeater::make('images')
                     ->label('Gambar Produk')
+                    ->minItems(1)
                     ->relationship('images')
                     ->schema([
                         FileUpload::make('image_path')
@@ -59,8 +60,7 @@ class ProductsResource extends Resource
                             ->directory('product_images')
                             ->required(),
                     ])
-                    ->minItems(1)
-                    ->maxItems(5),
+                    ->createItemButtonLabel('Tambah Gambar')
             ]);
     }
 
@@ -100,7 +100,7 @@ class ProductsResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ProductResource\RelationManagers\ImagesRelationManager::class,
+            // ProductResource\RelationManagers\ImagesRelationManager::class,
         ];
     }
 

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3  navbar-transparent ">
     <div class="container" style="background-color: #B53535; ">
         <a class="navbar-brand d-flex align-items-center text-white" href="/">
-            <img src="{{ url('assets/img/BoniagaLogo.jpg') }}" alt="Boniaga Logo" style="height: 50px;" class="me-2">
+            <img src="{{ url('assets/img/logo.png') }}" alt="Boniaga Logo" style="height: 50px;" class="me-2">
             <span class="fw-bold d-none d-sm-inline">Boniaga</span>
         </a>
         <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
@@ -15,20 +15,14 @@
         </button>
         <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0 ms-lg-12 ps-lg-5" id="navigation">
             <ul class="navbar-nav navbar-nav-hover ms-auto">
+            <li class="nav-item">
+                    <a class="nav-link text-white" href="/">Beranda</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="products">Produk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#tentang">Tentang Kami</a>
-                </li>
-
-                <li class="nav-item ms-lg-auto">
-                    <a class="nav-link nav-link-icon me-2"
-                        href="https://github.com/creativetimofficial/soft-ui-design-system" target="_blank">
-                        <i class="fa fa-github me-1"></i>
-                        <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
-                            data-bs-placement="bottom" title="Star us on Github">Github</p>
-                    </a>
+                    <a class="nav-link text-white" href="tentangkami">Tentang Kami</a>
                 </li>
                 <!-- <li class="nav-item my-auto ms-3 ms-lg-0">
                     <a href="https://www.creative-tim.com/product/material-kit-pro"

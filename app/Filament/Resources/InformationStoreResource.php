@@ -3,27 +3,23 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\InformationStoreResource\Pages;
-use App\Filament\Resources\InformationStoreResource\RelationManagers;
 use App\Models\InformationStore;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class InformationStoreResource extends Resource
 {
     protected static ?string $model = InformationStore::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
-
     protected static ?string $navigationGroup = 'Informasi Toko';
     protected static ?string $pluralModelLabel = 'Informasi Toko';
 
@@ -51,37 +47,22 @@ class InformationStoreResource extends Resource
                 TextColumn::make('email')->label('Email'),
                 ImageColumn::make('logo')->label('Logo'),
             ])
-            ->filters([
-                //
-            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Disable bulk delete
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListInformationStores::route('/'),
-            'create' => Pages\CreateInformationStore::route('/create'),
+            // 'create' page disediakan tapi kita akan disable aksesnya di bawah
             'edit' => Pages\EditInformationStore::route('/{record}/edit'),
         ];
     }
-<<<<<<< Updated upstream
-}
-=======
 
     // public static function getNavigationUrl(): string
     // {
@@ -96,4 +77,3 @@ class InformationStoreResource extends Resource
         return false;
     }
 }
->>>>>>> Stashed changes

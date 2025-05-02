@@ -13,7 +13,12 @@ class EditInformationStore extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            // Actions\DeleteAction::make(),
         ];
     }
+    public static function canDelete(): bool
+    {
+        return false;
+    }
+
 }
