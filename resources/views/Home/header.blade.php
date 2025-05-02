@@ -26,7 +26,7 @@
 
 <body>
 
-<header class="bg-gradient-dark">
+ <header class="bg-gradient-dark">
 
   <div class="page-header min-vh-75" style="background-image: url('assets/img/boniaga.jpg'); background-size: cover; background-position: center; position: relative;">
     <span class="mask bg-gradient-dark opacity-6"></span>
@@ -40,25 +40,14 @@
           </p>
           <a href="#produk" class="btn btn-light text-dark fw-semibold px-4 py-2" data-aos="zoom-in" data-aos-delay="500">Selengkapnya</a>
           <div class="d-flex justify-content-center mt-4" data-aos="fade-up" data-aos-delay="700">
-
-
-          
             <a href="https://www.facebook.com/share/1BWRhYSca9/" target="_blank"><i class="fab fa-facebook text-lg text-white me-4"></i></a>
             <a href="https://www.instagram.com/boniaga_anugrah?igsh=ZGN6cWhzMmVzZG9m" target="_blank"><i class="fab fa-instagram text-lg text-white me-4"></i></a>
             <a href="https://wa.me/+6285213915630" target="_blank"><i class="fab fa-whatsapp text-lg text-white"></i></a>
-          </div>
-
-          
-            <a href="https://www.facebook.com/share/1BWRhYSca9/" target="_blank"><i class="fab fa-facebook text-lg text-white me-4"></i></a>
-            <a href="https://www.instagram.com/boniaga_anugrah?igsh=ZGN6cWhzMmVzZG9m" target="_blank"><i class="fab fa-instagram text-lg text-white me-4"></i></a>
-            <a href="https://wa.me/+6285213915630" target="_blank"><i class="fab fa-whatsapp text-lg text-white"></i></a>
-          
-
           </div>
         </div>
       </div>
     </div>
   </div>
-</header>
-</body>
+ </header>
+ </body>
 </html>
