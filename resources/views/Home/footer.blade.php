@@ -1,4 +1,4 @@
-<footer class="footer pt-5 mt-5" style="background-color: black; color: white;">
+<footer class="bg-black text-white pt-4 mt-5"  style="background-color: #000;">
 
     <div class="container">
         <div class="row align-items-start text-center text-md-start">
@@ -40,7 +40,6 @@
             <div class="col-12 text-center">
                 <p class="mb-0 small">&copy; 2025 BONIAGA - Semua Hak Dilindungi</p>
             </div>
-
 
 <footer class="bg-black text-white pt-5 mt-5" style="background-color: #000;">
   <div class="container">
