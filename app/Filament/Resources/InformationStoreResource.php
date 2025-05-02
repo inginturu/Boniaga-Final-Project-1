@@ -79,4 +79,21 @@ class InformationStoreResource extends Resource
             'edit' => Pages\EditInformationStore::route('/{record}/edit'),
         ];
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    // public static function getNavigationUrl(): string
+    // {
+    //     $record = InformationStore::first();
+
+    //     return static::getUrl('edit', ['record' => $record]);
+    // }
+
+    // Disable tombol create
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+}
+>>>>>>> Stashed changes
