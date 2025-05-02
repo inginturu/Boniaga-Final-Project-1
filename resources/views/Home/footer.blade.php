@@ -1,5 +1,5 @@
-<<<<<<< Updated upstream
 <footer class="bg-black text-white pt-4 mt-5"  style="background-color: #000;">
+
     <div class="container">
         <div class="row align-items-start text-center text-md-start">
             <!-- Logo -->
@@ -40,8 +40,6 @@
             <div class="col-12 text-center">
                 <p class="mb-0 small">&copy; 2025 BONIAGA - Semua Hak Dilindungi</p>
             </div>
-=======
-
 
 <footer class="bg-black text-white pt-5 mt-5" style="background-color: #000;">
   <div class="container">
@@ -80,7 +78,27 @@
             referrerpolicy="no-referrer-when-downgrade">
           </iframe>
 
->>>>>>> Stashed changes
         </div>
+      </div>
     </div>
+
+    <!-- Garis Horizontal -->
+    <hr class="border-top border-light">
+
+    <!-- Copyright -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <p class="mb-0 small">&copy; 2025 <strong>BONIAGA</strong> – Semua Hak Dilindungi</p>
+      </div>
+    </div>
+  </div>
 </footer>
+
+<style>
+.hover-footer:hover {
+  text-decoration: underline;
+  color: #ffcc00;
+  transition: color 0.3s ease;
+}
+</style>
+
