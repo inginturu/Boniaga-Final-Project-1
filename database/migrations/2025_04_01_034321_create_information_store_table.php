@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('whatsapp_number')->nullable();
             $table->string('email')->nullable();
             $table->string('logo')->nullable();
-            $table->string('title');
-            $table->text('content')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

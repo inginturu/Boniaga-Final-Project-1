@@ -26,13 +26,27 @@ class InformationStoreResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            TextInput::make('name')->label('Nama Toko')->required(),
-            TextInput::make('title')->label('Judul Halaman')->required(),
-            TextInput::make('address')->label('Alamat')->nullable(),
-            TextInput::make('whatsapp_number')->label('Nomor WhatsApp')->tel()->nullable(),
-            TextInput::make('email')->label('Email')->email()->nullable(),
-            FileUpload::make('logo')->label('Logo')->image()->nullable(),
-            Textarea::make('content')->label('Deskripsi')->rows(5)->nullable(),
+            TextInput::make('name')
+                ->label('Nama Toko')
+                ->required(),
+
+            TextInput::make('address')
+                ->label('Alamat')
+                ->required(),
+
+            TextInput::make('whatsapp_number')
+                ->label('Nomor WhatsApp')
+                ->tel()
+                ->required(),
+
+            TextInput::make('email')->label('Email')
+                ->email()
+                ->required(),
+
+            FileUpload::make('logo')
+                ->label('Logo')
+                ->image()
+                ->required(),
         ]);
     }
 
@@ -41,7 +55,6 @@ class InformationStoreResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->label('Nama Toko'),
-                TextColumn::make('title')->label('Judul Halaman'),
                 TextColumn::make('address')->label('Alamat'),
                 TextColumn::make('whatsapp_number')->label('Nomor WhatsApp'),
                 TextColumn::make('email')->label('Email'),
@@ -74,6 +87,6 @@ class InformationStoreResource extends Resource
     // Disable tombol create
     public static function canCreate(): bool
     {
-        return false;
+        return true;
     }
 }
