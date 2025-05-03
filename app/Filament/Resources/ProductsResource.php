@@ -35,7 +35,8 @@ class ProductsResource extends Resource
                     ->label('Nama Produk')
                     ->live(onBlur: true)
                     ->reactive()
-                    ->rules(['required', 'unique:products,name'])
+                    ->unique(ignoreRecord: true)
+                    ->rules(['required'])
                     ->validationMessages([
                         'required' => 'Nama produk harus diisi.',
                         'unique' => 'Nama produk sudah ada.',
@@ -70,24 +71,22 @@ class ProductsResource extends Resource
 
                 Repeater::make('images')
                     ->label('Gambar Produk')
-                    ->minItems(1)
+                    ->live(onBlur: true)
+                    ->reactive()
+                    ->rules('required')
+                    ->validationMessages([
+                        'required' => 'Gambar produk harus diisi minimal 1 item.',
+                    ])
                     ->relationship('images')
                     ->schema([
                         FileUpload::make('image_path')
                             ->label('Upload Gambar')
                             ->image()
                             ->directory('product_images')
-                            ->live(onBlur: true)
-                            ->reactive()
-                            ->rules(['required', 'image'])
-                    ])
-                    ->validationMessages([
-                        'images.*.image_path.required' => 'Gambar harus diunggah.',
-                        'minItems' => 'File harus diisi minimal 1 gambar.',
-                        'image' => 'File harus berupa gambar.',
                     ])
                     ->createItemButtonLabel('Tambah Gambar')
-            ]);    }
+            ]);
+    }
 
     public static function table(Table $table): Table
     {

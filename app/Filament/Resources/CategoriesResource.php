@@ -39,7 +39,8 @@ class CategoriesResource extends Resource
                     ->label('Nama Kategori')
                     ->live(onBlur: true)
                     ->reactive()
-                    ->rules(['required', 'unique:categories,name'])
+                    ->unique(ignoreRecord: true)
+                    ->rules(['required'])
                     ->validationMessages([
                         'required' => 'Nama kategori harus diisi.',
                         'unique' => 'Nama kategori sudah ada.',
