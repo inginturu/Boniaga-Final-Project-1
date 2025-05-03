@@ -33,68 +33,92 @@ class ProductsResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->label('Nama Produk')
-                    ->required(),
+                    ->live(onBlur: true)
+                    ->reactive()
+                    ->unique(ignoreRecord: true)
+                    ->rules(['required'])
+                    ->validationMessages([
+                        'required' => 'Nama produk harus diisi.',
+                        'unique' => 'Nama produk sudah ada.',
+                    ]),
 
                 Textarea::make('description')
-                    ->label('Deskripsi'),
+                    ->label('Deskripsi')
+                    ->live(onBlur: true)
+                    ->reactive()
+                    ->rules('required')
+                    ->validationMessages(['required' => 'Deskripsi kategori harus diisi.',]),
 
                 TextInput::make('price')
                     ->label('Harga')
                     ->numeric()
-                    ->required(),
+                    ->live(onBlur: true)
+                    ->reactive()
+                    ->rules(['required', 'numeric'])
+                    ->validationMessages([
+                        'required' => 'Harga harus diisi.',
+                        'numeric' => 'Harga harus berupa angka.',
+                    ]),
 
                 Select::make('category_id')  // Menambahkan input kategori
                     ->label('Kategori')
                     ->searchable()
                     ->options(\App\Models\Categories::all()->pluck('name', 'id'))  // Menampilkan kategori dari model Category
-                    ->required(),
+                    ->live(onBlur: true)
+                    ->reactive()
+                    ->rules('required')
+                    ->validationMessages(['required' => 'Kategori harus dipilih.']),
 
                 Repeater::make('images')
                     ->label('Gambar Produk')
-                    ->minItems(1)
+                    ->live(onBlur: true)
+                    ->reactive()
+                    ->rules('required')
+                    ->validationMessages([
+                        'required' => 'Gambar produk harus diisi minimal 1 item.',
+                    ])
                     ->relationship('images')
                     ->schema([
                         FileUpload::make('image_path')
                             ->label('Upload Gambar')
                             ->image()
                             ->directory('product_images')
-                            ->required(),
                     ])
                     ->createItemButtonLabel('Tambah Gambar')
             ]);
     }
 
     public static function table(Table $table): Table
-{
-    return $table
-        ->columns([
-            TextColumn::make('name')->label('Nama Produk')->sortable(),
-            TextColumn::make('price')->label('Harga')->sortable(),
+    {
+        return $table
+            ->columns([
+                TextColumn::make('name')->label('Nama Produk')->sortable(),
+                TextColumn::make('price')->label('Harga')->sortable(),
 
-            ImageColumn::make('images.image_path')
-                ->label('Gambar Produk')
-                ->defaultImageUrl(url('/default-product.jpg')),
+                ImageColumn::make('images.image_path')
+                    ->label('Gambar Produk')
+                    ->defaultImageUrl(url('/default-product.jpg')),
 
-            TextColumn::make('category.name') // tampilkan nama kategori
-                ->label('Kategori')
-                ->sortable(),
-        ])
-        ->filters([])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-        ])
-        ->bulkActions([
-            Tables\Actions\DeleteBulkAction::make()
-                ->label('Hapus Produk')
-                ->icon('heroicon-o-trash')
-                ->color('danger')
-                ->requiresConfirmation()
-                ->modalHeading('Hapus Produk yang Dipilih?')
-                ->modalSubheading('Tindakan ini tidak bisa dibatalkan. Lanjutkan?')
-                ->modalButton('Ya, Hapus'),
-        ])
-        ->recordUrl(null);
-}
+                TextColumn::make('category.name') // tampilkan nama kategori
+                    ->label('Kategori')
+                    ->sortable(),
+            ])
+            ->filters([])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make()
+                    ->label('Hapus Produk')
+                    ->icon('heroicon-o-trash')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->modalHeading('Hapus Produk yang Dipilih?')
+                    ->modalSubheading('Tindakan ini tidak bisa dibatalkan. Lanjutkan?')
+                    ->modalButton('Ya, Hapus'),
+            ])
+            ->recordUrl(null);
+    }
 
 
     public static function getRelations(): array

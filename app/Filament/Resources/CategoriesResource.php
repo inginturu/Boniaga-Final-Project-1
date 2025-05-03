@@ -28,7 +28,7 @@ class CategoriesResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return 'Produk';
+        return 'Kategori Produk';
     }
 
     public static function form(Form $form): Form
@@ -37,11 +37,22 @@ class CategoriesResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->label('Nama Kategori')
-                    ->required(),
+                    ->live(onBlur: true)
+                    ->reactive()
+                    ->unique(ignoreRecord: true)
+                    ->rules(['required'])
+                    ->validationMessages([
+                        'required' => 'Nama kategori harus diisi.',
+                        'unique' => 'Nama kategori sudah ada.',
+                    ]),
 
                 Textarea::make('description')
-                    ->label('Deskripsi Kategori'),
-                
+                    ->label('Deskripsi Kategori')
+                    ->live(onBlur: true)
+                    ->reactive()
+                    ->rules('required')
+                    ->validationMessages(['required' => 'Deskripsi kategori harus diisi.',]),
+
                 FileUpload::make('image')
                     ->label('Gambar Kategori')
                     ->image()
