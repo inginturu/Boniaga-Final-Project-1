@@ -77,16 +77,16 @@ class InformationStoreResource extends Resource
         ];
     }
 
-    // public static function getNavigationUrl(): string
-    // {
-    //     $record = InformationStore::first();
+    public static function getNavigationUrl(): string
+    {
+        $record = InformationStore::first();
 
-    //     return static::getUrl('edit', ['record' => $record]);
-    // }
+        return static::getUrl('edit', ['record' => $record]);
+    }
 
     // Disable tombol create
     public static function canCreate(): bool
     {
-        return false;
+        return true;
     }
 }
