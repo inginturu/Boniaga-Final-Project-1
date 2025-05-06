@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Products;
+use App\Models\Categories;
 
 class ProductController extends Controller
 {
@@ -17,22 +18,28 @@ class ProductController extends Controller
     // }
 
     public function index(Request $request)
-{
-    $query = Products::with('images');
+    {
+        $query = Products::with('images');
 
-    if ($request->has('search') && $request->search != '') {
-        $keyword = $request->search;
-        $query->where(function($q) use ($keyword) {
-            $q->where('name', 'like', "%{$keyword}%")
-              ->orWhere('description', 'like', "%{$keyword}%");
-        });
+        // Filter berdasarkan pencarian
+        if ($request->has('search') && $request->search != '') {
+            $keyword = $request->search;
+            $query->where(function($q) use ($keyword) {
+                $q->where('name', 'like', "%{$keyword}%")
+                ->orWhere('description', 'like', "%{$keyword}%");
+            });
+        }
+        
+        // Filter berdasarkan kategori
+        if ($request->has('category') && $request->category != '') {
+            $query->where('category_id', $request->category);
+        }
+
+        $products = $query->paginate(6)->withQueryString();
+        $categories = Categories::all();
+
+        return view('products.index', compact('products', 'categories'));
     }
-
-    $products = $query->paginate(6)->withQueryString();
-
-    return view('products.index', compact('products'));
-}
-
 
     /**
      * Show the form for creating a new resource.
@@ -55,20 +62,18 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
+        // Mengambil produk dengan eager loading gambar
         $product = Products::with('images')->findOrFail($id);
-        return view('products.show', compact('product'));
-
-            // Mengambil produk dengan eager loading gambar
-    $product = Products::with('images')->findOrFail($id);
-    
-    // Mengambil produk terkait (misalnya dari kategori yang sama)
-    $relatedProducts = Products::with('images')
-                        ->where('id', '!=', $id)
-                        ->limit(4)
-                        ->get();
-    
-    // Menampilkan view dengan data produk dan produk terkait
-    return view('products.show', compact('product', 'relatedProducts'));
+        
+        // Mengambil produk terkait (misalnya dari kategori yang sama)
+        $relatedProducts = Products::with('images')
+                            ->where('id', '!=', $id)
+                            ->where('category_id', $product->category_id) // Tambahkan ini untuk mendapatkan produk dari kategori yang sama
+                            ->limit(4)
+                            ->get();
+        
+        // Menampilkan view dengan data produk dan produk terkait
+        return view('products.show', compact('product', 'relatedProducts'));
     }
 
     /**
