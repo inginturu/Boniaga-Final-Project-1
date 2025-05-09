@@ -29,7 +29,7 @@
             </p>
         </div>
         <div class="col-md-5 text-center">
-            <img src="{{ asset('storage/foto-baju.jpg') }}" alt="Produk Boniaga" class="img-fluid rounded">
+            <img src="{{ url('assets/img/foto-baju.jpg') }}" alt="Produk Boniaga" class="img-fluid rounded">
         </div>
     </div>
 
@@ -39,7 +39,7 @@
 
     <div class="row mt-4">
         <div class="col-md-5">
-            <img src="{{ asset('storage/maps-boniaga.png') }}" alt="Peta Lokasi" class="img-fluid rounded">
+            <img src="{{ url('assets/img/maps-boniaga.png') }}" alt="Peta Lokasi" class="img-fluid rounded">
         </div>
         <div class="col-md-7 text-justify">
             <p>
