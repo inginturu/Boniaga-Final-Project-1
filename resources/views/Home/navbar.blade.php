@@ -22,10 +22,10 @@
                     <a class="nav-link text-white" href="/">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="products">Produk</a>
+                    <a class="nav-link text-white" href="/products">Produk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="tentangkami">Tentang Kami</a>
+                    <a class="nav-link text-white" href="/tentangkami">Tentang Kami</a>
                 </li>
                 <!-- <li class="nav-item my-auto ms-3 ms-lg-0">
                     <a href="https://www.creative-tim.com/product/material-kit-pro"
