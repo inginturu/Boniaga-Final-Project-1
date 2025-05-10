@@ -13,7 +13,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = ModelsCategories::all();
-        return view('Home.about-us', compact( 'categories'));
+        return view('Home.index', compact( 'categories'));
     }
 
     /**

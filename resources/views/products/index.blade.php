@@ -26,25 +26,47 @@
       margin-bottom: 30px;
     }
 
-    .search-form {
+    /* Combined search form styling */
+    .combined-search-form {
       position: relative;
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
+      display: flex;
+      flex-wrap: nowrap;
+      border-radius: 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      border: 1px solid #ddd;
+      overflow: hidden;
+    }
+
+    .category-select {
+      width: 160px;
+      border: none;
+      border-right: 1px solid #ddd;
+      padding: 12px 15px;
+      font-size: 15px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: calc(100% - 10px) center;
+      background-size: 10px;
+      appearance: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .category-select:focus {
+      outline: none;
     }
 
     .search-input {
-      width: 100%;
-      padding: 14px 50px 14px 20px;
-      border: 1px solid #ddd;
-      border-radius: 24px;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      flex: 1;
+      border: none;
+      padding: 12px 50px 12px 15px;
+      font-size: 15px;
+      transition: all 0.2s ease;
     }
 
     .search-input:focus {
-      border-color: #aaa;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       outline: none;
     }
 
@@ -56,8 +78,8 @@
       color: white;
       border: none;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -67,6 +89,11 @@
 
     .search-button:hover {
       background: #555;
+    }
+
+    .combined-search-form:focus-within {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+      border-color: #aaa;
     }
 
     .product-grid {
@@ -173,14 +200,7 @@
       justify-content: center;
     }
 
-    /* NEW PAGINATION STYLES */
-    .pagination-container {
-      text-align: center;
-      margin: 40px 0;
-    }
-
     .pagination {
-
       display: flex;
       list-style: none;
       padding: 0;
@@ -232,6 +252,36 @@
       font-size: 18px;
     }
 
+    .active-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 800px;
+    }
+
+    .filter-tag {
+      display: inline-flex;
+      align-items: center;
+      background: #f0f0f0;
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .filter-tag .remove-filter {
+      margin-left: 6px;
+      cursor: pointer;
+      color: #888;
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .filter-tag .remove-filter:hover {
+      color: #333;
+    }
+
     @media (max-width: 768px) {
       .product-grid {
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -248,6 +298,17 @@
 
       .product-title {
         font-size: 16px;
+      }
+      
+      .combined-search-form {
+        flex-direction: column;
+        border-radius: 12px;
+      }
+      
+      .category-select {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
       }
     }
 
@@ -278,7 +339,6 @@
       .btn-view {
         width: 100%;
         text-align: center;
-
       }
     }
   </style>
@@ -288,9 +348,16 @@
   @include('home.navbar')
 
   <div class="container search-container">
-
-    <form action="{{ route('products') }}" method="GET" class="search-form">
-      <input type="text" name="search" class="search-input" placeholder="Cari produk..." value="{{ request('search') }}">
+    <form action="{{ route('products') }}" method="GET" class="combined-search-form" id="searchForm">
+      <select name="category" class="category-select" id="categorySelect">
+        <option value="">Semua Kategori</option>
+        @foreach($categories as $category)
+          <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+        @endforeach
+      </select>
+      
+      <input type="text" name="search" class="search-input" placeholder="Cari di Boniaga" value="{{ request('search') }}">
+      
       <button type="submit" class="search-button" aria-label="Search">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -298,12 +365,26 @@
       </button>
     </form>
 
+    @if(request('search') || request('category'))
+      <div class="active-filters">
+        @if(request('search'))
+          <div class="filter-tag">
+            Pencarian: {{ request('search') }}
+            <a href="{{ route('products', array_merge(request()->except('search'), ['page' => 1])) }}" class="remove-filter" title="Hapus filter">×</a>
+          </div>
+        @endif
+        
+        @if(request('category'))
+          <div class="filter-tag">
+            Kategori: {{ $categories->find(request('category'))->name }}
+            <a href="{{ route('products', array_merge(request()->except('category'), ['page' => 1])) }}" class="remove-filter" title="Hapus filter">×</a>
+          </div>
+        @endif
+      </div>
+    @endif
   </div>
 
-
-
   <section class="container">
-
     @if(count($products) > 0)
       <div class="product-grid">
         @foreach ($products as $product)
@@ -316,7 +397,6 @@
               @endif
             </div>
             <div class="product-body">
-
               <h5 class="product-title">{{ $product->name }}</h5>
               <p class="product-description">{{ $product->description }}</p>
               <div class="product-footer">
@@ -328,13 +408,15 @@
         @endforeach
       </div>
 
-
       <!-- Pagination Section -->
       <div class="pagination-container">
         {{ $products->withQueryString()->links('pagination::bootstrap-4') }}
       </div>
+    @else
+      <div class="no-products">
+        <p>Tidak ada produk yang ditemukan.</p>
+      </div>
     @endif
-
   </section>
 
   @include('home.footer')
@@ -343,6 +425,21 @@
   <script src="{{ asset('assets/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
   <script src="{{ asset('assets/js/material-kit.min.js?v=3.0.4') }}" type="text/javascript"></script>
+
+  <script>
+    // Script untuk melakukan submit form ketika kategori berubah
+    document.getElementById('categorySelect').addEventListener('change', function() {
+      document.getElementById('searchForm').submit();
+    });
+
+    // Script untuk melakukan submit form ketika user menekan Enter pada input pencarian
+    document.querySelector('.search-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('searchForm').submit();
+      }
+    });
+  </script>
 
 </body>
 
