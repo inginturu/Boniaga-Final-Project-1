@@ -345,7 +345,7 @@
 </head>
 
 <body>
-  @include('Home.navbar')
+  @include('home.navbar')
 
   <div class="container search-container">
     <form action="{{ route('products') }}" method="GET" class="combined-search-form" id="searchForm">
