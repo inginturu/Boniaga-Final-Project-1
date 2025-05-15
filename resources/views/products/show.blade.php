@@ -715,7 +715,7 @@ Apakah produk ini masih tersedia? Saya ingin melakukan pemesanan. Terima kasih.`
           const encodedMessage = encodeURIComponent(message);
           
           // Create the WhatsApp URL with the pre-filled message
-          const whatsappURL = `https://wa.me/+6282363553911?text=${encodedMessage}`;
+          const whatsappURL = `https://wa.me/+6285370459127?text=${encodedMessage}`;
           
           // Open WhatsApp in a new tab
           window.open(whatsappURL, '_blank');
