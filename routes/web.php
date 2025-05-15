@@ -32,3 +32,8 @@ Route::get('/link-storage', function () {
     Artisan::call('storage:link');
     return 'Linked!';
 });
+
+Route::get('/assets', function () {
+    Artisan::call('filament:assets');
+    return 'Migrated!';
+});
