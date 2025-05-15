@@ -326,6 +326,57 @@
       z-index: 5;
     }
     
+    /* Order Options */
+    .order-options {
+      margin-top: 20px;
+    }
+    
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .quantity-selector label {
+      margin-right: 10px;
+      font-weight: 500;
+    }
+    
+    .quantity-input {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .quantity-btn {
+      background-color: #f5f5f5;
+      border: none;
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    
+    .quantity-btn:hover {
+      background-color: #e0e0e0;
+    }
+    
+    .quantity-value {
+      width: 40px;
+      text-align: center;
+      border: none;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      height: 30px;
+      padding: 0;
+    }
+    
     @media (max-width: 768px) {
       .product-layout {
         flex-direction: column;
@@ -449,7 +500,19 @@
             Rp {{ number_format($product->price ?? 120000, 0, ',', '.') }}
           </div>
           
-          <a href="https://wa.me/+6285213915630" target="_blank" class="btn-contact">HUBUNGI PENJUAL</a>
+          <!-- Quantity Selector -->
+          <div class="order-options">
+            <div class="quantity-selector">
+              <label for="quantity">Jumlah:</label>
+              <div class="quantity-input">
+                <button type="button" class="quantity-btn" id="decreaseQty">-</button>
+                <input type="number" id="quantity" class="quantity-value" value="1" min="1" max="100">
+                <button type="button" class="quantity-btn" id="increaseQty">+</button>
+              </div>
+            </div>
+          </div>
+          
+          <a href="#" id="orderBtn" class="btn-contact">PESAN SEKARANG</a>
           <span class="price-note">Harga bersih dan dapat dinegosiasikan kembali</span>
         </div>
       </div>
@@ -592,6 +655,71 @@
           // Swiped right - previous image
           updateGallery(currentIndex - 1);
         }
+      }
+      
+      // Quantity selector functionality
+      const quantityInput = document.getElementById('quantity');
+      const decreaseBtn = document.getElementById('decreaseQty');
+      const increaseBtn = document.getElementById('increaseQty');
+      
+      if (decreaseBtn && increaseBtn && quantityInput) {
+        decreaseBtn.addEventListener('click', () => {
+          const currentValue = parseInt(quantityInput.value);
+          if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+          }
+        });
+        
+        increaseBtn.addEventListener('click', () => {
+          const currentValue = parseInt(quantityInput.value);
+          if (currentValue < 100) {
+            quantityInput.value = currentValue + 1;
+          }
+        });
+        
+        // Ensure only numbers are entered
+        quantityInput.addEventListener('input', () => {
+          let value = parseInt(quantityInput.value);
+          if (isNaN(value) || value < 1) {
+            quantityInput.value = 1;
+          } else if (value > 100) {
+            quantityInput.value = 100;
+          }
+        });
+      }
+      
+      // WhatsApp order button functionality
+      const orderBtn = document.getElementById('orderBtn');
+      if (orderBtn) {
+        orderBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Get product details
+          const productName = '{{ $product->name ?? "Ulos Songket" }}';
+          const productPrice = '{{ number_format($product->price ?? 120000, 0, ",", ".") }}';
+          const quantity = document.getElementById('quantity').value;
+          const totalPrice = '{{ $product->price ?? 120000 }}' * quantity;
+          const formattedTotalPrice = new Intl.NumberFormat('id-ID').format(totalPrice);
+          
+          // Create WhatsApp message template
+          const message = `Halo, saya tertarik untuk memesan produk berikut:
+          
+*Nama Produk:* ${productName}
+*Harga:* Rp ${productPrice}
+*Jumlah:* ${quantity}
+*Total:* Rp ${formattedTotalPrice}
+
+Apakah produk ini masih tersedia? Saya ingin melakukan pemesanan. Terima kasih.`;
+          
+          // Encode the message for URL
+          const encodedMessage = encodeURIComponent(message);
+          
+          // Create the WhatsApp URL with the pre-filled message
+          const whatsappURL = `https://wa.me/+6285370459127?text=${encodedMessage}`;
+          
+          // Open WhatsApp in a new tab
+          window.open(whatsappURL, '_blank');
+        });
       }
     });
   </script>
