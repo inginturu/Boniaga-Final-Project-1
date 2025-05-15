@@ -74,7 +74,8 @@ class CategoriesResource extends Resource
                     ->limit(100),
 
                 ImageColumn::make('image')
-                    ->label('Gambar Kategori'),
+                    ->label('Gambar Kategori')
+                    ->url(fn ($record) => $record->image ? asset('storage/' . $record->image) : null),
 
                 TextColumn::make('products_count')
                     ->label(label: 'Jumlah Produk')
