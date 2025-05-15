@@ -102,7 +102,7 @@
               <p class="card-text">Ulos tradisional berkualitas tinggi yang ditenun dengan teknik warisan turun-temurun.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <span class="product-price">Rp 850.000</span>
-                <a href="#" class="btn btn-sm btn-outline-red">Lihat Detail</a>
+                <!-- <a href="#" class="btn btn-sm btn-outline-red">Lihat Detail</a> -->
               </div>
             </div>
           </div>
@@ -119,7 +119,7 @@
               <p class="card-text">Tas tangan dengan motif khas Batak yang dibuat dengan teknik anyaman tradisional.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <span class="product-price">Rp 450.000</span>
-                <a href="#" class="btn btn-sm btn-outline-red">Lihat Detail</a>
+                <!-- <a href="#" class="btn btn-sm btn-outline-red">Lihat Detail</a> -->
               </div>
             </div>
           </div>
@@ -136,7 +136,7 @@
               <p class="card-text">Jas dengan sentuhan modern yang mengintegrasikan motif khas Batak yang elegan.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <span class="product-price">Rp 1.250.000</span>
-                <a href="#" class="btn btn-sm btn-outline-red">Lihat Detail</a>
+                <!-- <a href="#" class="btn btn-sm btn-outline-red">Lihat Detail</a> -->
               </div>
             </div>
           </div>
