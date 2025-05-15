@@ -33,12 +33,32 @@
 /* Custom animation styles for collapse */
 .navbar-collapse {
     transition: max-height 0.35s ease;
-    max-height: 0;
     overflow: hidden;
 }
 
-.navbar-collapse.show {
-    max-height: 300px; /* Adjust this value as needed */
+/* Only apply max-height: 0 on mobile */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        max-height: 0;
+    }
+    
+    .navbar-collapse.show {
+        max-height: 300px; /* Adjust this value as needed */
+    }
+}
+
+/* Always show navbar on desktop */
+@media (min-width: 992px) {
+    .navbar-collapse {
+        display: flex !important;
+        max-height: none !important;
+        height: auto !important;
+    }
+    
+    /* Hide navbar toggler on desktop */
+    .navbar-toggler {
+        display: none;
+    }
 }
 
 /* Hamburger button animation */
@@ -76,35 +96,69 @@ document.addEventListener('DOMContentLoaded', function() {
     var navbarCollapse = document.getElementById('navigation');
     var isOpen = false;
     
-    // Simple toggle function with animation
-    navbarToggler.addEventListener('click', function() {
-        isOpen = !isOpen;
-        
-        // Toggle active class for hamburger animation
-        if (isOpen) {
-            navbarToggler.classList.add('active');
-        } else {
-            navbarToggler.classList.remove('active');
-        }
-        
-        if (isOpen) {
-            // Show the navigation with animation
-            navbarCollapse.classList.add('show');
-            
-            // Change text to black
-            navLinks.forEach(function(link) {
-                link.classList.remove('text-white');
-                link.classList.add('text-dark');
-            });
-        } else {
-            // Hide the navigation with animation
+    // Function to check if we're on mobile view
+    function isMobileView() {
+        return window.innerWidth < 992; // Bootstrap's lg breakpoint
+    }
+    
+    // Initialize navbar based on screen size
+    function initNavbar() {
+        if (!isMobileView()) {
+            // On desktop, always show navbar
             navbarCollapse.classList.remove('show');
-            
-            // Change text back to white
+            navbarCollapse.style.display = 'flex';
+            // Keep links white on desktop
             navLinks.forEach(function(link) {
-                link.classList.remove('text-dark');
                 link.classList.add('text-white');
+                link.classList.remove('text-dark');
             });
+        } else {
+            // On mobile, navbar starts collapsed
+            navbarCollapse.classList.remove('show');
+            if (window.getComputedStyle(navbarCollapse).display === 'flex') {
+                navbarCollapse.style.display = '';
+            }
+        }
+    }
+    
+    // Call once on page load
+    initNavbar();
+    
+    // Also call on window resize
+    window.addEventListener('resize', initNavbar);
+    
+    // Simple toggle function with animation (only used on mobile)
+    navbarToggler.addEventListener('click', function() {
+        // Only toggle if we're in mobile view
+        if (isMobileView()) {
+            isOpen = !isOpen;
+            
+            // Toggle active class for hamburger animation
+            if (isOpen) {
+                navbarToggler.classList.add('active');
+            } else {
+                navbarToggler.classList.remove('active');
+            }
+            
+            if (isOpen) {
+                // Show the navigation with animation
+                navbarCollapse.classList.add('show');
+                
+                // Change text to black
+                navLinks.forEach(function(link) {
+                    link.classList.remove('text-white');
+                    link.classList.add('text-dark');
+                });
+            } else {
+                // Hide the navigation with animation
+                navbarCollapse.classList.remove('show');
+                
+                // Change text back to white
+                navLinks.forEach(function(link) {
+                    link.classList.remove('text-dark');
+                    link.classList.add('text-white');
+                });
+            }
         }
     });
 });
