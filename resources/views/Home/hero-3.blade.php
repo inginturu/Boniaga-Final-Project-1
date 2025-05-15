@@ -2,7 +2,7 @@
 <section class="cultural-section">
   <div class="container">
     <div class="section-title text-center mb-5" data-aos="fade-up">
-      <h2>Mengapa Memilih Produk Boniaga?</h2>
+      <h2>Mengapa Memilih Produk Batak?</h2>
     </div>
 
     <div class="row text-center">
