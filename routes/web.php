@@ -11,10 +11,10 @@ Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
 
-Route::get('/contoh', function () {
-    return view('halo.index');
-});
+// Route::get('/contoh', function () {
+//     return view('halo.index');
+// });
 
-Route::get('/tentangkami', function () {
-    return view('about.tentangkami');
+Route::get('/about-us', function () {
+    return view('about.show');
 });

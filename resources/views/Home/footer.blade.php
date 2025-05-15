@@ -11,9 +11,15 @@
       <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="100">
         <h6 class="fw-bold text-white">Panel Navigasi</h6>
         <ul class="list-unstyled">
+<<<<<<< Updated upstream
           <li><a href="#" class="text-white text-decoration-none hover-footer">Beranda</a></li>
           <li><a href="#" class="text-white text-decoration-none hover-footer">Tentang Boniaga</a></li>
           <li><a href="#" class="text-white text-decoration-none hover-footer">Jelajah Produk</a></li>
+=======
+          <li><a href="/" class="text-white text-decoration-none hover-footer">Beranda</a></li>
+          <li><a href="/about-us" class="text-white text-decoration-none hover-footer">Tentang Boniaga</a></li>
+          <li><a href="/products" class="text-white text-decoration-none hover-footer">Jelajah Produk</a></li>
+>>>>>>> Stashed changes
         </ul>
       </div>
 
