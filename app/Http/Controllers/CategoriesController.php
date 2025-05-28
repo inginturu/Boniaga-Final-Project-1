@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categories as ModelsCategories;
+use App\Models\Products;
 
 class CategoriesController extends Controller
 {
@@ -13,7 +14,11 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = ModelsCategories::all();
-        return view('home.index', compact( 'categories'));
+        $featuredProducts = Products::with('images')
+            ->whereIn('name', [
+                'Produk baguss'
+            ])->get();
+        return view('home.index', compact('categories', 'featuredProducts'));
     }
 
     /**
