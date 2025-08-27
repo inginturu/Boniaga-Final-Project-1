@@ -18,7 +18,7 @@ class CategoriesController extends Controller
             ->whereIn('name', [
                 'Produk baguss'
             ])->get();
-        return view('Home.index', compact('categories', 'featuredProducts'));
+        return view('home.index', compact('categories', 'featuredProducts'));
     }
 
     /**
