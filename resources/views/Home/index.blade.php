@@ -44,6 +44,7 @@
 
   <!-- -------- START HEADER 7 w/ text and video ------- -->
   @include('home.header')
+  
   <!-- -------- END HEADER 7 w/ text and video ------- -->
   @include('home.hero-1')
   @include('home.hero-2')
