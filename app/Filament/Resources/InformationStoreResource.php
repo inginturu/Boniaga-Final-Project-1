@@ -46,6 +46,8 @@ class InformationStoreResource extends Resource
             FileUpload::make('logo')
                 ->label('Logo')
                 ->image()
+                ->disk('public')
+                ->directory('logos')
                 ->required(),
         ]);
     }
