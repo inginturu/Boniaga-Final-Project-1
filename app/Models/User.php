@@ -44,6 +44,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function canAccessFilament(): bool
+    {
+        return $this->hasVerifiedEmail();
+    }
     public function categories()
     {
         return $this->hasMany(Categories::class, 'user_id');
