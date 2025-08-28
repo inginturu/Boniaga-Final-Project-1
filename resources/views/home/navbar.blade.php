@@ -2,7 +2,7 @@
     <div class="container" style="background-color: #B53535;">
         @if($informationStore)
         <a class="navbar-brand d-flex align-items-center text-white" href="/">
-            <img src="{{asset('storage/' .$informationStore->logo) }}" alt="Boniaga Logo" style="height: 50px;" class="me-2">
+            <img src="{{asset('storage/app/public/' .$informationStore->logo) }}" alt="Boniaga Logo" style="height: 50px;" class="me-2">
             <span class="fw-bold d-none d-sm-inline">{{$informationStore->name}}</span>
         </a>
         @endif
