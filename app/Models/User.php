@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+// 1. TAMBAHKAN DUA BARIS INI
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
+
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+// 2. TAMBAHKAN "implements FilamentUser" DI SINI
+class User extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable;
 
@@ -44,10 +49,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function canAccessPanel(): bool
+
+    /**
+     * 3. PERBAIKI METHOD INI - WAJIB ADA PARAMETER (Panel $panel)
+     * Ini adalah method yang benar untuk otorisasi Filament v3.
+     */
+    public function canAccessPanel(Panel $panel): bool
     {
         return $this->hasVerifiedEmail();
     }
+
+    // Relasi Anda tetap aman di sini
     public function categories()
     {
         return $this->hasMany(Categories::class, 'user_id');
